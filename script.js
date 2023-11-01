@@ -22,7 +22,7 @@ const fetchAllPlayers = async () => {
         const json = await response.json();
         // console.log(json.data.players)
         state.players = json.data.players
-        // console.log(state.players)
+        console.log(state.players)
         // console.log(state.players.name)
         return state.players
 
@@ -36,6 +36,8 @@ const fetchAllPlayers = async () => {
 
 const fetchSinglePlayer = async (playerId) => {
     try {
+        const response = await fetch (`${APIURL}/${playerId}`)
+        const json = await response.json()
 
     } catch (err) {
         console.error(`Oh no, trouble fetching player #${playerId}!`, err);
@@ -52,9 +54,10 @@ const addNewPlayer = async (playerObj) => {
 
 const removePlayer = async (playerId) => {
     try {
-        const response = await fetch (APIURL+`/${PLAYER-ID}`, {
+        const response = await fetch (`${APIURL}players/${playerId}`, {
             method: "DELETE"
         })
+        console.log(response)
 
         init()
 
@@ -96,6 +99,7 @@ const renderAllPlayers = (playerList) => {
         const allPlayers = playerList.map((player) => {
             const li = document.createElement("li")
             li.innerHTML = `
+            <p>${player.id}</p>
             <h2>${player.name}</h2>
             <p>${player.breed}</p>
             <img src = "${player.imageUrl}" />
@@ -104,6 +108,7 @@ const renderAllPlayers = (playerList) => {
             removeBtn.innerText ="X"
             removeBtn.addEventListener ("click", () => {
                 removePlayer(player.id)
+                console.log("DELETED")
             })
             li.appendChild(removeBtn)
             return li
