@@ -101,16 +101,16 @@ const addNewPlayer = async (playerObj) => {
         console.log(breed)
         let status = newPlayerForm.status.value
         console.log(status)
-        let image = newPlayerForm.imageUrl.value
-        console.log(image)
-        let team = newPlayerForm.teamId.value
-        console.log(team)
+        let imageUrl = newPlayerForm.imageUrl.value
+        console.log(imageUrl)
+        let teamId = newPlayerForm.teamId.value
+        console.log(teamId)
 
         const response = await fetch (`${APIURL}players/`, {
             method: "POST",
             headers: {"Content-type": "application/json"},
             body: JSON.stringify({
-                name, breed, status, image, team
+                name, breed, status, imageUrl, teamId
             })
         })
 
