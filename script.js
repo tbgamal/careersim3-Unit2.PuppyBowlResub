@@ -1,7 +1,7 @@
 const playerContainer = document.getElementById('all-players-container');
 const newPlayerFormContainer = document.getElementById('new-player-form');
 const playerDetailsContainer = document.getElementById('player-details')
-
+let newPlayerForm = document.querySelector("#new-player-form > form")
 // Add your cohort name to the cohortName variable below, replacing the 'COHORT-NAME' placeholder
 const cohortName = '2309-FTB-ET-WEB-FT';
 // Use the APIURL variable for fetch requests
@@ -92,6 +92,29 @@ const fetchSinglePlayer = async (playerId) => {
     // fetchSinglePlayer(756)
 const addNewPlayer = async (playerObj) => {
     try {
+        playerObj.preventDefault();
+        let newPlayerForm = document.querySelector("#new-player-form > form")
+
+        let name = newPlayerForm.name.value
+        console.log(name)
+        let breed = newPlayerForm.breed.value
+        console.log(breed)
+        let status = newPlayerForm.status.value
+        console.log(status)
+        let image = newPlayerForm.imageUrl.value
+        console.log(image)
+        let team = newPlayerForm.teamId.value
+        console.log(team)
+
+        const response = await fetch (`${APIURL}players/`, {
+            method: "POST",
+            headers: {"Content-type": "application/json"},
+            body: JSON.stringify({
+                name, breed, status, image, team
+            })
+        })
+
+        init()
 
     } catch (err) {
         console.error('Oops, something went wrong with adding that player!', err);
@@ -197,6 +220,35 @@ const renderAllPlayers = (playerList) => {
  */
 const renderNewPlayerForm = () => {
     try {
+        newPlayerFormContainer.innerHTML = `
+        <form id="new-player-form">
+            <label>
+                Name
+                <input type="text" name="name" />
+            </label>
+            <label>
+                Breed
+                <input type="text" name="breed" />
+            </label>
+            <label>
+                Status
+                <select id="status">
+                <option value="field">field</option>
+                <option value="bench" selected>bench</option>
+                </select>
+            </label>
+            <label>
+                Image URL
+                <input type="url" name="imageUrl" />
+            </label>
+            <label>
+                Team
+                <input type="number" name="teamId" />
+            </label>
+            <button>Add Player</button>
+        </form>            
+        `
+        newPlayerFormContainer.addEventListener("submit", addNewPlayer)
         
     } catch (err) {
         console.error('Uh oh, trouble rendering the new player form!', err);

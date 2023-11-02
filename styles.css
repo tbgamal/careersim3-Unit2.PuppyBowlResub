@@ -19,3 +19,7 @@ li {
 li > img {
   width: 100px;
 }
+
+#player-details > img {
+  width: 200px
+}
