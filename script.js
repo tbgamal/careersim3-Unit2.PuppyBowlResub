@@ -1,5 +1,6 @@
 const playerContainer = document.getElementById('all-players-container');
 const newPlayerFormContainer = document.getElementById('new-player-form');
+const playerDetailsContainer = document.getElementById('player-details')
 
 // Add your cohort name to the cohortName variable below, replacing the 'COHORT-NAME' placeholder
 const cohortName = '2309-FTB-ET-WEB-FT';
@@ -17,7 +18,7 @@ const state = {
  */
 const fetchAllPlayers = async () => {
     try {
-        const response = await fetch (`${APIURL}/players`)
+        const response = await fetch (`${APIURL}players`)
         // console.log(response)
         const json = await response.json();
         // console.log(json.data.players)
@@ -36,15 +37,59 @@ const fetchAllPlayers = async () => {
 
 const fetchSinglePlayer = async (playerId) => {
     try {
-        const response = await fetch (`${APIURL}players/${playerId}`)
+        const response = await fetch (`${APIURL}players/`)
         const json = await response.json()
-        console.log(json)
+        console.log(json.data.players.indexOf(playerid))
+        const singlePlayerId = json.data.player.id
+        console.log (singlePlayerId)
+        // // const div = document.createElement("div")
+        // playerDetailsContainer.innerHTML = `
+        // <img src = "${singlePlayer.imageUrl}
+        // <p>${singlePlayer.id}</p>
+        // <h2>${singlePlayer.name}</h2>
+        // <p>${singlePlayer.breed}</p>
+        // <p>${singlePlayer.status}</p>
+        // <p>${singlePlayer.teamId}</p>
+        // `
+
+        // return playerDetailsContainer
+
+        // playerDetailsContainer.appendChild(div)
+
+
+        // const playerDetails = () => {
+        //     const div = document.createElement("div")
+        //     div.innerHTML = `
+        //     <img src = "${singlePlayer.imageUrl}
+        //     <p>${singlePlayer.id}</p>
+        //     <h2>${singlePlayer.name}</h2>
+        //     <p>${singlePlayer.breed}</p>
+        //     <p>${singlePlayer.status}</p>
+        //     <p>${singlePlayer.teamId}</p>
+        //     `
+        //     console.log(div)
+        //     return div
+        
+        // const playerDetails = singlePlayer.map ((player) => {
+        //     const div = document.createElement("div")
+        //     div.innerHTML = `
+        //     <img src = "${player.imageUrl}
+        //     <p>${player.id}</p>
+        //     <h2>${player.name}</h2>
+        //     <p>${player.breed}</p>
+        //     <p>${player.status}</p>
+        //     <p>${player.teamId}</p>
+        //     `
+        //     console.log(div)
+        //     return div
+        // })
+        // playerDetailsContainer.replaceChildren(playerDetails)
 
     } catch (err) {
         console.error(`Oh no, trouble fetching player #${playerId}!`, err);
     }
 };
-    fetchSinglePlayer(110)
+    // fetchSinglePlayer(756)
 const addNewPlayer = async (playerObj) => {
     try {
 
@@ -111,6 +156,26 @@ const renderAllPlayers = (playerList) => {
                 removePlayer(player.id)
                 console.log("DELETED")
             })
+
+            const detailsBtn = document.createElement("button")
+            detailsBtn.innerText = "See Details"
+            detailsBtn.addEventListener ("click", async () => {
+                const response = await fetch (`${APIURL}players/${player.id}`)
+                const json = await response.json()
+
+                playerDetailsContainer.innerHTML = `
+                <img src = ${player.imageUrl} />
+                <p>${player.id}</p>
+                <p>${player.name}</p>
+                <p>${player.breed}</p>
+                <p>${player.status}</p>
+                <p>${player.teamId}</p>
+                `
+                
+                console.log("fetched " + player.id)
+            })
+
+            li.appendChild(detailsBtn)
             li.appendChild(removeBtn)
             return li
 
