@@ -62,10 +62,6 @@ body {
   width: 100px;
 }
 
-#new-player-form button {
-  /* border-radius: 50%; */
-}
-
 #player-details {
   display: flex;
   justify-content: space-around;
