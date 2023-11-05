@@ -4,22 +4,117 @@
   box-sizing: border-box;
 }
 
-li {
-  list-style-type: none;
+header {
+  /* width: 80vw; */
+  height: 50px;
+  background-color: antiquewhite;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  display: flex;
+  position: static;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+body {
+  /* width: 80vw; */
+  margin: 10px auto;
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* .form-details-container {
+  display: flex;
+  flex-wrap: wrap;
+} */
+
+#new-player-form {
+  max-width: inherit;
+  display: flex;
+  align-content: center;
+  justify-content: space-around;
+  /* flex-wrap: wrap; */
+}
+#new-player-form > form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 5px;
+  width: 100vw;
+}
+
+#new-player-form > form > label {
+  display: flex;
   flex-direction: column;
+  text-align: center;
+}
+
+#new-player-form > form input {
+  width: 100px;
+}
+
+#new-player-form > form #team-input {
+  width: 100px;
+}
+
+#new-player-form button {
+  /* border-radius: 50%; */
+}
+
+#player-details {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin: 10px;
+  padding: 5px;
+  border: solid lightblue 1px;
+}
+
+#player-details > #text-details {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+#player-details > img {
+  
+  width: 250px;
+  margin-right: 10px;
+}
+
+#all-players-container {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+}
+
+li {
+  position: relative;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-around;
+  justify-items: center;
   /* flex: 1 1 300px; */
-  max-height: 200px;
+  max-height: 250px;
+  width: 20vw;
   margin: 10px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 li > img {
-  width: 100px;
-}
-
-#player-details > img {
-  width: 200px
+  max-width: 10vw;
+  /* max-height: 100px; */
+  align-self: center;
 }

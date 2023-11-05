@@ -19,6 +19,7 @@ const state = {
 const fetchAllPlayers = async () => {
     try {
         const response = await fetch (`${APIURL}players`)
+        console.log(`${APIURL}players`)
         // console.log(response)
         const json = await response.json();
         // console.log(json.data.players)
@@ -168,13 +169,13 @@ const renderAllPlayers = (playerList) => {
         const allPlayers = playerList.map((player) => {
             const li = document.createElement("li")
             li.innerHTML = `
-            <p>${player.id}</p>
+            
             <h2>${player.name}</h2>
             <p>${player.breed}</p>
             <img src = "${player.imageUrl}" />
             `
             const removeBtn = document.createElement("button")
-            removeBtn.innerText ="X"
+            removeBtn.innerText ="Delete"
             removeBtn.addEventListener ("click", () => {
                 removePlayer(player.id)
                 console.log("DELETED")
@@ -188,16 +189,27 @@ const renderAllPlayers = (playerList) => {
 
                 playerDetailsContainer.innerHTML = `
                 <img src = ${player.imageUrl} />
-                <p>${player.id}</p>
-                <p>${player.name}</p>
-                <p>${player.breed}</p>
-                <p>${player.status}</p>
-                <p>${player.teamId}</p>
+                <div id="text-details">
+                    <p>Player ID: ${player.id}</p>
+                    <p>Player Name: ${player.name}</p>
+                    <p>Breed: ${player.breed}</p>
+                    <p>Status: ${player.status}</p>
+                    <p>Team: ${player.teamId}</p>
+                </div>
                 `
                 
                 console.log("fetched " + player.id)
             })
 
+            li.style.textAlign ='center'
+
+            li.addEventListener("mouseover", () => {
+                li.style.backgroundColor = 'lightblue'
+            })
+            li.addEventListener("mouseout", () => {
+                li.style.backgroundColor = ''
+            })
+            
             li.appendChild(detailsBtn)
             li.appendChild(removeBtn)
             return li
@@ -221,7 +233,7 @@ const renderAllPlayers = (playerList) => {
 const renderNewPlayerForm = () => {
     try {
         newPlayerFormContainer.innerHTML = `
-        <form id="new-player-form">
+        <form>
             <label>
                 Name
                 <input type="text" name="name" />
@@ -243,7 +255,7 @@ const renderNewPlayerForm = () => {
             </label>
             <label>
                 Team
-                <input type="number" name="teamId" />
+                <input type="number" id = "team-input" name="teamId" size="1" min="0" max="10" />
             </label>
             <button>Add Player</button>
         </form>            
