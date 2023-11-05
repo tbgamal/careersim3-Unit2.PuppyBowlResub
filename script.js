@@ -20,12 +20,9 @@ const fetchAllPlayers = async () => {
     try {
         const response = await fetch (`${APIURL}players`)
         console.log(`${APIURL}players`)
-        // console.log(response)
         const json = await response.json();
-        // console.log(json.data.players)
-        state.players = json.data.players
-        console.log(state.players)
-        // console.log(state.players.name)
+        state.players = json.data.players;
+        console.log(state.players);
         return state.players
 
     } catch (err) {
@@ -33,58 +30,9 @@ const fetchAllPlayers = async () => {
     }
 };
 
-//DELETE THIS LATER
-// fetchAllPlayers()
-
 const fetchSinglePlayer = async (playerId) => {
     try {
-        const response = await fetch (`${APIURL}players/`)
-        const json = await response.json()
-        console.log(json.data.players.indexOf(playerid))
-        const singlePlayerId = json.data.player.id
-        console.log (singlePlayerId)
-        // // const div = document.createElement("div")
-        // playerDetailsContainer.innerHTML = `
-        // <img src = "${singlePlayer.imageUrl}
-        // <p>${singlePlayer.id}</p>
-        // <h2>${singlePlayer.name}</h2>
-        // <p>${singlePlayer.breed}</p>
-        // <p>${singlePlayer.status}</p>
-        // <p>${singlePlayer.teamId}</p>
-        // `
-
-        // return playerDetailsContainer
-
-        // playerDetailsContainer.appendChild(div)
-
-
-        // const playerDetails = () => {
-        //     const div = document.createElement("div")
-        //     div.innerHTML = `
-        //     <img src = "${singlePlayer.imageUrl}
-        //     <p>${singlePlayer.id}</p>
-        //     <h2>${singlePlayer.name}</h2>
-        //     <p>${singlePlayer.breed}</p>
-        //     <p>${singlePlayer.status}</p>
-        //     <p>${singlePlayer.teamId}</p>
-        //     `
-        //     console.log(div)
-        //     return div
         
-        // const playerDetails = singlePlayer.map ((player) => {
-        //     const div = document.createElement("div")
-        //     div.innerHTML = `
-        //     <img src = "${player.imageUrl}
-        //     <p>${player.id}</p>
-        //     <h2>${player.name}</h2>
-        //     <p>${player.breed}</p>
-        //     <p>${player.status}</p>
-        //     <p>${player.teamId}</p>
-        //     `
-        //     console.log(div)
-        //     return div
-        // })
-        // playerDetailsContainer.replaceChildren(playerDetails)
 
     } catch (err) {
         console.error(`Oh no, trouble fetching player #${playerId}!`, err);
